@@ -1,0 +1,100 @@
+@import "~src/app/sass/variables";
+
+.x-app-table-button {
+  position: relative;
+  left: 63%;
+  top: -14px;
+  background-color: rgb(116, 140, 208);
+  color: white;
+}
+
+.x-app-table {
+  max-width: 950px;
+  max-height: 350px;
+  transition: all 220ms linear,;
+  overflow: auto;
+  background: white;
+  box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+  &.maximize {
+    position: absolute;
+    max-width: 100vw;
+    height: 100vh;
+    max-height: none;
+    left: 0;
+    top: 0;
+    z-index: 30;
+  }
+
+  .x-app-table__main {
+    border-collapse: collapse;
+    td, th {
+      padding: 12px;
+      min-width: 150px;
+      white-space: nowrap;
+      text-align: left;
+    }
+    &.x-app-table__main--fall {
+      animation: fall 2s ease-out;
+      @keyframes fall {
+        0% {transform: translateY(-500px)}
+        10% {transform: translateY(0) scaleY(0.5)}
+        20% {transform: translateY(-150px)}
+        30% {transform: translateY(0) scaleY(0.6)}
+        40% {transform: translateY(-60px)}
+        50% {transform: translateY(0) scaleY(0.7)}
+        60% {transform: translateY(-20px)}
+        70% {transform: translateY(0) scaleY(0.8)}
+        80% {transform: translateY(-8px)}
+        90% {transform: translateY(0) scaleY(0.9)}
+        95% {transform: translateY(-2px)}
+        100% {transform: translateY(0) scaleY(1)}
+
+      }
+    }
+  }
+
+  .x-app-table__head {
+    position: relative;
+    z-index: 10;
+    display: table;
+    border-bottom: 1px solid #748cd0;
+
+    th {
+      background: #FFF;
+    }
+    &.x-app-table__head--show {
+      transition: transform 240ms;
+    }
+  }
+
+  .x-app-table__body {
+    position: relative;
+    z-index: 1;
+    display: table;
+    td:first-child {
+      background: #FFF;
+      border-right: 1px solid $border-color;
+    }
+    td {
+      border-top: 1px solid $border-color;
+    }
+
+    tr:hover {
+      background-color: #e9e9e9;
+    }
+  }
+}
+
+
+
+.shake {
+  animation: shake 1s ease-out;
+  @keyframes shake {
+    0% {transform: translateX(-20px)}
+    20% {transform: translateX(20px)}
+    40% {transform: translateX(-18px)}
+    60% {transform: translateX(18px)}
+    80% {transform: translateX(-10px)}
+    100% {transform: translateX(0)}
+  }
+}

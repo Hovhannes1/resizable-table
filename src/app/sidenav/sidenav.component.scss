@@ -1,0 +1,28 @@
+@import "~src/app/sass/variables";
+
+.x-app-sidenav {
+  position: sticky;
+  top: -16px;
+  flex-basis: 20%;
+  .x-app-sidenav__radio-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .x-app-sidenav__radio {
+    position: relative;
+    margin: 18px 0;
+  }
+
+  .x-app-sidenav__radio-line {
+    position: absolute;
+    top: 15px;
+    left: 8px;
+    width: 2px;
+    height: 46px;
+    opacity: 0.1;
+    background-color: $primary;
+  }
+}
+
+

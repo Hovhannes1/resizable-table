@@ -1,0 +1,9 @@
+<div class="x-app-sidenav">
+  <mat-radio-group class="x-app-sidenav__radio-group" [(ngModel)]="positionSideNav">
+      <mat-radio-button  class="x-app-sidenav__radio" *ngFor="let title of sideNav, index as i" [value]="title.name"
+                         (change)="changePosition(i)">
+            {{title.name}}
+          <div class="x-app-sidenav__radio-line" *ngIf="title.name != 'DATA'"></div>
+      </mat-radio-button>
+  </mat-radio-group>
+</div>

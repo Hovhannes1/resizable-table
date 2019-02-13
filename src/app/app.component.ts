@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
+import {TaskComponent} from './body/task.component';
+
 
 @Component({
   selector: 'app-root',

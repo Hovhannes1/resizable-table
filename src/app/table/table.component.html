@@ -1,0 +1,180 @@
+<button class="x-app-table-button" mat-raised-button (click)="doSmt()" (dblclick)="doSmtTwo()">+ Add Property</button>
+<div class="x-app-table" (dblclick)="maximize=!maximize" (scroll)="tableHeaderHide($event)" [ngClass]="{'shake': tableShaking, 'maximize': maximize}">
+  <table class="x-app-table__main" [ngClass]="{'x-app-table__main--fall' : distanceY }">
+    <thead class="x-app-table__head" [ngClass]="{'x-app-table__head--show': !hideTableHead}"
+           [ngStyle]="{ 'transform': hideTableHead ? 'translateY('+ this.positionY - 40 + 'px)' : 'translateY('+ this.positionY + 'px)' }">
+    <tr>
+      <th [style.transform]="'translateX('+ this.positionX + 'px)'" style="position: relative; z-index: 5;">NAME
+      </th>
+      <th *ngFor="let header of headers">{{header}}</th>
+    </tr>
+    </thead>
+    <tbody class="x-app-table__body">
+    <tr>
+      <td [style.transform]="'translateX('+ this.positionX + 'px)'">Name</td>
+      <td>Text</td>
+      <td>add validation</td>
+      <td>02.12.2004</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+      <td>02.12.2005</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+    </tr>
+    <tr>
+      <td [style.transform]="'translateX('+ this.positionX + 'px)'">Name</td>
+      <td>Text</td>
+      <td>add validation</td>
+      <td>02.12.2004</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+      <td>02.12.2005</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+    </tr>
+    <tr>
+      <td [style.transform]="'translateX('+ this.positionX + 'px)'">Name</td>
+      <td>Text</td>
+      <td>add validation</td>
+      <td>02.12.2004</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+      <td>02.12.2005</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+    </tr>
+    <tr>
+      <td [style.transform]="'translateX('+ this.positionX + 'px)'">Name</td>
+      <td>Text</td>
+      <td>add validation</td>
+      <td>02.12.2004</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+      <td>02.12.2005</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+    </tr>
+    <tr>
+      <td [style.transform]="'translateX('+ this.positionX + 'px)'">Name</td>
+      <td>Text</td>
+      <td>add validation</td>
+      <td>02.12.2004</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+      <td>02.12.2005</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+    </tr>
+    <tr>
+      <td [style.transform]="'translateX('+ this.positionX + 'px)'">Name</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2004</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+      <td>02.12.2005</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+    </tr>
+    <tr>
+      <td [style.transform]="'translateX('+ this.positionX + 'px)'">Name</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2004</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+      <td>02.12.2005</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+    </tr>
+    <tr>
+      <td [style.transform]="'translateX('+ this.positionX + 'px)'">Name</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2004</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+      <td>02.12.2005</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+    </tr>
+    <tr>
+      <td [style.transform]="'translateX('+ this.positionX + 'px)'">Name</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2003</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+      <td>02.12.2005</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+    </tr>
+    <tr>
+      <td [style.transform]="'translateX('+ this.positionX + 'px)'">Name</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+      <td>02.12.2005</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+    </tr>
+    <tr>
+      <td [style.transform]="'translateX('+ this.positionX + 'px)'">Name</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2005</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+      <td>02.12.2005</td>
+      <td>User Updated</td>
+      <td>Lookup</td>
+      <td>add validation</td>
+      <td>02.12.2006</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

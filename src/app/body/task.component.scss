@@ -1,0 +1,195 @@
+@import "~src/app/sass/variables";
+@import "~src/app/sass/mixins";
+
+.x-app {
+  padding-top: 68px;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgb(216, 229, 237);
+  animation: appear 1.2s ease-out;
+  @keyframes appear {
+    from{transform: scale(0.1) translate(6000px, -3000px) rotate(180deg);}
+    to {transform: scale(1) translate(0, 0) rotate(0);}
+  }
+  &.x-app--shake {
+    animation: toggle 2s ease-in;
+    @keyframes toggle {
+      0% {transform: rotate3d(1,1,1, 360deg);}
+      20% {transform: rotate3d(1,1,1, 350deg);}
+      40% {transform: rotate3d(1,1,1, 370deg);}
+      60% {transform: rotate3d(1,1,1, 355deg);}
+      80% {transform: rotate3d(1,1,1, 365deg);}
+      100% {transform: rotate3d(1,1,1, 360deg);}
+    }
+  }
+}
+
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+.x-app-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 24px;
+  border: 4px solid rgb(216, 229, 237);
+  border-radius: 8px;
+  background-color: white;
+  color: $primary;
+
+  .x-app-card__info {
+    display: flex;
+    margin-left: -16px;
+  }
+
+  .x-app-card__picture {
+    padding: 7px;
+    width: 54px;
+    height: 54px;
+    border-radius: 6px;
+    background-color: rgb(65, 184, 178);
+  }
+
+  .x-app-card__center {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 24px;
+  }
+
+  .x-app-card__breadcrumb {
+    font-weight: 100;
+    font-size: 18px;
+  }
+
+  .x-app-card__title {
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .x-app-card__action-group {
+    padding: 10px 0 0;
+  }
+
+  .x-app-card__action {
+    margin-left: 12px;
+    padding: 0 28px;
+  }
+
+  .x-app-card__content {
+    display: flex;
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  .x-app-card__left {
+    flex-basis: 88%;
+  }
+
+}
+
+.x-app-form {
+  margin-bottom: 60px;
+  .x-app-form__row {
+    margin-top: 8px;
+  }
+
+  .x-app-form__input {
+    margin-right: 48px;
+    width: 410px;
+  }
+
+  .x-app-form__text {
+    vertical-align: sub;
+  }
+
+  .x-app-form__label {
+    color: $primary;
+    font-weight: 600;
+  }
+
+  .x-app-form__icon-group {
+    margin-top: 4px;
+  }
+
+  .x-app-form__icon {
+    display: inline-block;
+    padding: 4px;
+    width: 26px;
+    height: 26px;
+    fill: gray;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.24s, transform 0.3s;
+    &:hover  {
+      transform: scale(2);
+      background-color: #dadada;
+    }
+    &.x-app-form__icon--active {
+      background-color: #dadada;
+    }
+  }
+
+  .x-app-form__dot {
+    display: inline-block;
+    margin: 8px 16px 0 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    &.x-app-form__dot--active {
+      border: 2px solid $primary;
+    }
+    &.x-app-form__dot--lightgrey {background-color: lightgrey}
+    &.x-app-form__dot--coral {background-color: #ffa76c}
+    &.x-app-form__dot--lightblue {background-color: #97bcca}
+    &.x-app-form__dot--green {background-color: darkolivegreen}
+    &.x-app-form__dot--yellow {background-color: yellow}
+    &.x-app-form__dot--darkblue {background-color: #00007a}
+    &.x-app-form__dot--orange {background-color: orange}
+    &.x-app-form__dot--darkred {background-color: darkred}
+    &.x-app-form__dot--blue {background-color: #009fd6}
+    &.x-app-form__dot--brown {background-color: saddlebrown}
+  }
+}
+
+::ng-deep.mat-radio-button.mat-accent .mat-radio-outer-circle {
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  width: 5px;
+  height: 5px;
+  border: 2px none;
+  background: #808080a8;
+  box-shadow: 0 0 12px 2px $primary;
+  border-radius: 50%;
+  transition: border-color ease 280ms;
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle,
+  ::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+  ::ng-deep.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+  display: none;
+  background-color: $primary;
+}
+
+::ng-deep.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  position: absolute;
+  left: -8px;
+  top: -8px;
+  width: 35px;
+  height: 36px;
+  border: 6px solid $primary;
+  box-sizing: border-box;
+  background-color: transparent;
+  transition: transform ease 280ms,background-color ease 280ms;
+}
+
+.example-selected-value {
+  margin: 15px 0;
+}
