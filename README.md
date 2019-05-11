@@ -1,3 +1,7 @@
+# Why to choose this table?
+
+Fixed header, fixed column also columns are resizable. If you double click table it will take full screen size do same again it will go back. Pure HTML, SASS and TS
+
 # Singularity
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
