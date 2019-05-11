@@ -1,4 +1,4 @@
-<div class="x-app-sidenav">
+<div class="x-app-sidenav" [ngStyle]=" distanceTop > 120  && {'transform' : 'translateY(' + (distanceTop - 120) + 'px)'}">
   <mat-radio-group class="x-app-sidenav__radio-group" [(ngModel)]="positionSideNav">
       <mat-radio-button  class="x-app-sidenav__radio" *ngFor="let title of sideNav, index as i" [value]="title.name"
                          (change)="changePosition(i)">

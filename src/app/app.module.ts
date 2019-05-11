@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -42,6 +43,8 @@ import { TaskComponent } from './body/task.component';
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { TableComponent } from './table/table.component';
+import { DemoTableComponent } from './demo-table/demo-table.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,8 @@ import { TableComponent } from './table/table.component';
     TaskComponent,
     HeaderComponent,
     SidenavComponent,
-    TableComponent
+    TableComponent,
+    DemoTableComponent
   ],
   exports: [
     MatAutocompleteModule,
@@ -122,6 +126,8 @@ import { TableComponent } from './table/table.component';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    HttpClientModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

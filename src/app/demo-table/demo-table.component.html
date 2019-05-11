@@ -1,5 +1,5 @@
 <div class="x-app-container"
-     [ngClass]="{'x-app-container--select-disabled': isResizable || colIsResizable || isDownResizable || colTwoIsResizable || colThreeIsResizable}"
+     [ngClass]="{'x-app-container--select-disabled': isResizable || isDownResizable || isResizableCol.some(active)}"
      (mousemove)="doResizing($event)"
      (mouseup)="resizeStop(); colResizeStop(); resizeDownStop(); colTwoResizeStop(); colThreeResizeStop()"
      (mouseleave)="resizeStop(); colResizeStop(); resizeDownStop(); colTwoResizeStop(); colThreeResizeStop()">
@@ -11,20 +11,20 @@
        [style.max-width.px]="horizontalCord"
        [style.max-height.px]="verticalCord">
     <div class="x-app-table__col-resizer"
-         [style.left]="(colCoordinate + positionX) >= 150 ? (colCoordinate + positionX)+ 'px': '150px'"
+         [style.left]="(widthOfCol[0] + positionX) >= 150 ? (widthOfCol[0] + positionX)+ 'px': '150px'"
          [style.top.px]="this.positionY"
          (mousedown)="colResizeStart()"
          (mouseup)="colResizeStop()"></div>
     <div class="x-app-table__col-resizer"
-         [style.left]="(colTwoCoordinate + positionX) >= 150 ? (colCoordinate + colTwoCoordinate )+ 'px': '300px'"
+         [style.left]="(widthOfCol[1] + positionX) >= 150 ? (widthOfCol[0] + widthOfCol[1] )+ 'px': '300px'"
          [style.top.px]="this.positionY"
-         [style.display]="colTwoCoordinate <  positionX ? 'none': ''"
+         [style.display]="widthOfCol[1] <  positionX ? 'none': ''"
          (mousedown)="colTwoResizeStart()"
          (mouseup)="colTwoResizeStop()"></div>
     <div class="x-app-table__col-resizer"
-         [style.left]="(colThreeCoordinate + positionX) >= 150 ? (colCoordinate + colTwoCoordinate + colThreeCoordinate )+ 'px': '450px'"
+         [style.left]="(widthOfCol[2] + positionX) >= 150 ? (widthOfCol[0] + widthOfCol[1] + widthOfCol[2] )+ 'px': '450px'"
          [style.top.px]="this.positionY"
-         [style.display]="(colTwoCoordinate + colThreeCoordinate) < positionX ? 'none': ''"
+         [style.display]="(widthOfCol[1] + widthOfCol[2]) < positionX ? 'none': ''"
          (mousedown)="colThreeResizeStart()"
          (mouseup)="colThreeResizeStop()"></div>
     <table class="x-app-table__main"
@@ -34,22 +34,22 @@
              [ngStyle]="{'transform': hideTableHead ? 'translateY('+ this.positionY - 40 + 'px)' : 'translateY('+ this.positionY + 'px)' }">
       <tr>
         <th [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">NAME
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">NAME
         </th>
-        <th [style.min-width.px]="(colTwoCoordinate + positionX) >= 150 ? colTwoCoordinate : '150px'"
+        <th [style.min-width.px]="(widthOfCol[1] + positionX) >= 150 ? widthOfCol[1] : '150px'"
         >NAME</th>
         <th *ngFor="let header of headers, let i = index"
-            [style.min-width.px]="i === 0 && (colThreeCoordinate + positionX) >= 150 ? colThreeCoordinate : '150px'"
+            [style.min-width.px]="i === 0 && (widthOfCol[2] + positionX) >= 150 ? widthOfCol[2] : '150px'"
         >{{header}}</th>
       </tr>
       </thead>
       <tbody class="x-app-table__body">
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name your favorite color
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name your favorite color
         </td>
-        <td [style.min-width.px]="(colTwoCoordinate + positionX) >= 150 ? colTwoCoordinate : '150px'">Write the name of your first pet</td>
-        <td [style.min-width.px]="(colThreeCoordinate + positionX) >= 150 ? colThreeCoordinate : '150px'">add validation</td>
+        <td [style.min-width.px]="(widthOfCol[1] + positionX) >= 150 ? widthOfCol[1] : '150px'">Write the name of your first pet</td>
+        <td [style.min-width.px]="(widthOfCol[2] + positionX) >= 150 ? widthOfCol[2] : '150px'">add validation</td>
         <td>02.12.2004</td>
         <td>User Updated</td>
         <td>Lookup</td>
@@ -63,7 +63,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Text</td>
         <td>add validation</td>
         <td>02.12.2004</td>
@@ -79,7 +79,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Text</td>
         <td>add validation</td>
         <td>02.12.2004</td>
@@ -95,7 +95,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Text</td>
         <td>add validation</td>
         <td>02.12.2004</td>
@@ -111,7 +111,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Text</td>
         <td>add validation</td>
         <td>02.12.2004</td>
@@ -127,7 +127,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Lookup</td>
         <td>add validation</td>
         <td>02.12.2004</td>
@@ -143,7 +143,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Lookup</td>
         <td>add validation</td>
         <td>02.12.2004</td>
@@ -159,7 +159,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Lookup</td>
         <td>add validation</td>
         <td>02.12.2004</td>
@@ -175,7 +175,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Lookup</td>
         <td>add validation</td>
         <td>02.12.2003</td>
@@ -191,7 +191,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Lookup</td>
         <td>add validation</td>
         <td>02.12.2006</td>
@@ -207,7 +207,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Lookup</td>
         <td>add validation</td>
         <td>02.12.2005</td>
@@ -223,7 +223,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Text</td>
         <td>add validation</td>
         <td>02.12.2004</td>
@@ -239,7 +239,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Lookup</td>
         <td>add validation</td>
         <td>02.12.2004</td>
@@ -255,7 +255,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Lookup</td>
         <td>add validation</td>
         <td>02.12.2004</td>
@@ -271,7 +271,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Lookup</td>
         <td>add validation</td>
         <td>02.12.2004</td>
@@ -287,7 +287,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Lookup</td>
         <td>add validation</td>
         <td>02.12.2003</td>
@@ -303,7 +303,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Lookup</td>
         <td>add validation</td>
         <td>02.12.2006</td>
@@ -319,7 +319,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Lookup</td>
         <td>add validation</td>
         <td>02.12.2005</td>
@@ -335,7 +335,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Lookup</td>
         <td>add validation</td>
         <td>02.12.2004</td>
@@ -351,7 +351,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Lookup</td>
         <td>add validation</td>
         <td>02.12.2003</td>
@@ -367,7 +367,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Lookup</td>
         <td>add validation</td>
         <td>02.12.2006</td>
@@ -383,7 +383,7 @@
       </tr>
       <tr>
         <td [style.transform]="'translateX('+ this.positionX + 'px)'"
-            [style.min-width.px]="(colCoordinate + positionX) >= 150 ? colCoordinate : '150px'">Name</td>
+            [style.min-width.px]="(widthOfCol[0] + positionX) >= 150 ? widthOfCol[0] : '150px'">Name</td>
         <td>Lookup</td>
         <td>add validation</td>
         <td>02.12.2005</td>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 export interface NavList {
   id: number;
   name: string;
@@ -10,6 +10,7 @@ export interface NavList {
 })
 export class SidenavComponent implements OnInit {
 
+  @Input() distanceTop: number;
   public positionSideNav  = 'Details';
   public sideNav: NavList[] = [
     {id: 0 , name: 'Details'},

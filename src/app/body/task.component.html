@@ -1,4 +1,4 @@
-<div class="x-app" [ngClass]="{'x-app--shake' : this.table.shaking}" (scroll)="headerShowHide($event)" (mousedown)="magnet($event)">
+<div class="x-app" [ngClass]="{'x-app--shake' : this.table.shaking}" (scroll)="headerShowHide($event)" (mousemove)="getCoordinates($event)">
     <app-header [hideHead]="hideHeader"></app-header>
     <div class="x-app-card">
         <div class="x-app-card__info">
@@ -78,10 +78,25 @@
                     </div>
                 </form>
 
-                <span class="x-app-card__title" id="Properties">Properties</span>
-                <app-table #table [distanceY]="cordinateY"></app-table>
+                <div class="x-app-card__title" id="Properties">Properties</div>
+                <app-table #table
+                           [isFast]="coordinateY"
+                           [mousePositionX]="cursorPositionX"
+                           [oldPositionX]="oldCursorPositionX"
+                           [mousePositionY]="cursorPositionY">
+
+                </app-table>
+                <!--<app-demo-table #demoTable-->
+                                <!--[isFast]="coordinateY"-->
+                                <!--[mousePositionX]="cursorPositionX"-->
+                                <!--[oldPositionX]="oldCursorPositionX"-->
+                                <!--[mousePositionY]="cursorPositionY"></app-demo-table>-->
             </div>
-            <app-sidenav></app-sidenav>
+            <app-sidenav [distanceTop]="lastScrollValue"></app-sidenav>
         </div>
     </div>
 </div>
+
+<!--<div class="x-app-cursor">-->
+  <!---->
+<!--</div>-->

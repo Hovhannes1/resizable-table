@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {HeaderComponent} from '../header/header.component';
@@ -26,10 +25,11 @@ export class TaskComponent implements OnInit {
   ]);
   systemNameControl = new FormControl('', [Validators.required, ]);
 
-  @ViewChild('table')
-    public table: TableComponent;
+  @ViewChild('table') public table: TableComponent;
+  @ViewChild('demoTable') public demoTable: TableComponent;
   public cursorPositionX: number;
   public cursorPositionY: number;
+  public oldCursorPositionX: number;
 
   matcher = new MyErrorStateMatcher();
 
@@ -37,22 +37,24 @@ export class TaskComponent implements OnInit {
   colors: any[];
 
   public hideHeader = false;
-  public lastScroleValue = 0;
-  public cordinateY: any;
+  public lastScrollValue = 0;
+  public coordinateY: any;
   public headerShowHide(event: Event) {
     const newScroleValue: Element = <Element>event.target;
-    this.hideHeader = this.lastScroleValue < newScroleValue.scrollTop && newScroleValue.scrollTop > 60;
-    const cordinateOld = this.lastScroleValue;
-    this.lastScroleValue = newScroleValue.scrollTop;
+    this.hideHeader = this.lastScrollValue < newScroleValue.scrollTop && newScroleValue.scrollTop > 60;
+    const cordinateOld = this.lastScrollValue;
+    this.lastScrollValue = newScroleValue.scrollTop;
     const cordinateNew = newScroleValue.scrollTop;
-    this.cordinateY = (cordinateNew - cordinateOld) > 40;
+    this.coordinateY = (cordinateNew - cordinateOld) > 40;
   }
 
 
-  public magnet(event) {
+  public getCoordinates(event) {
+    this.oldCursorPositionX = this.cursorPositionX;
     this.cursorPositionX = event.screenX;
     this.cursorPositionY = event.screenY;
   }
+
   public setDotActive(i) {
     for (let j = 0; j < this.icons.length; j++) {
       this.colors[j].state = i === this.colors[j].id;
@@ -69,6 +71,7 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.icons  = [
       {id: 0, name: 'icon-block', state: false},
       {id: 1, name: 'icon-document', state: false},

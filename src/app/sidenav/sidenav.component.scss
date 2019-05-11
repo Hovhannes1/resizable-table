@@ -1,8 +1,6 @@
 @import "~src/app/sass/variables";
 
 .x-app-sidenav {
-  position: sticky;
-  top: -16px;
   flex-basis: 20%;
   .x-app-sidenav__radio-group {
     display: flex;

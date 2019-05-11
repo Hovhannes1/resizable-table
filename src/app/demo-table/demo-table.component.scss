@@ -98,9 +98,9 @@
         z-index: 5;
       }
     }
-    //&.x-app-table__head--show {
-    //  transition: transform 50ms;
-    //}
+    &.x-app-table__head--show {
+      transition: transform 50ms;
+    }
   }
 
   .x-app-table__body {

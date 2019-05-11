@@ -1,11 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  selector: 'app-demo-table',
+  templateUrl: './demo-table.component.html',
+  styleUrls: ['./demo-table.component.scss']
 })
-export class TableComponent implements OnInit {
+export class DemoTableComponent implements OnInit {
+
   headers: string[];
   public maximize = false;
 
@@ -24,8 +25,14 @@ export class TableComponent implements OnInit {
 
   public isResizable = false;
   public isDownResizable = false;
+
   public horizontalCord = 600;
   public verticalCord = 350;
+  public colMinWidth = 150;
+  public distance = 30;
+
+  public isResizableCol = [];
+  public widthOfCol = [];
 
   public colIsResizable = false;
   public colTwoIsResizable = false;
@@ -33,6 +40,10 @@ export class TableComponent implements OnInit {
   public colCoordinate = 150;
   public colTwoCoordinate = 150;
   public colThreeCoordinate = 150;
+
+  public active = function(element) {
+    return element === true;
+  };
 
   public resizeStart() {
     this.isResizable = true;
@@ -51,18 +62,28 @@ export class TableComponent implements OnInit {
       this.verticalCord = this.verticalCord + e.movementY;
     } if (this.verticalCord < 300) {this.verticalCord = 300; }
 
-    if (this.colIsResizable && this.colCoordinate >= 150) {
-      this.colCoordinate = this.mousePositionX - 30;
-    } if (this.colCoordinate < 150) {this.colCoordinate = 150; }
+    // if (this.colIsResizable && this.colCoordinate >= 150) {
+    //   this.colCoordinate = this.mousePositionX - 30;
+    // } if (this.colCoordinate < 150) {this.colCoordinate = 150; }
+    //
+    // if (this.colTwoIsResizable && this.colTwoCoordinate >= 150) {
+    //   this.colTwoCoordinate = this.mousePositionX - this.colCoordinate - 30;
+    // } if (this.colTwoCoordinate < 150) {this.colTwoCoordinate = 150; }
+    //
+    // if (this.colThreeIsResizable && this.colThreeCoordinate >= 150) {
+    //   this.colThreeCoordinate = this.mousePositionX - this.colCoordinate - this.colTwoCoordinate - 30;
+    // } if (this.colThreeCoordinate < 150) {this.colThreeCoordinate = 150; }
 
-    if (this.colTwoIsResizable && this.colTwoCoordinate >= 150) {
-      this.colTwoCoordinate = this.mousePositionX - this.colCoordinate - 30;
-    } if (this.colTwoCoordinate < 150) {this.colTwoCoordinate = 150; }
-
-    if (this.colThreeIsResizable && this.colThreeCoordinate >= 150) {
-      this.colThreeCoordinate = this.mousePositionX - this.colCoordinate - this.colTwoCoordinate - 30;
-    } if (this.colThreeCoordinate < 150) {this.colThreeCoordinate = 150; }
-
+    for (let i = 0; i < this.headers.length; i++) {
+      if (this.isResizableCol[i] && this.widthOfCol[i] >= this.colMinWidth) {
+        for (let j = 0; j < this.headers.length; j++) {
+          if (j < i) {
+            this.distance += this.widthOfCol[j];
+          }
+        }
+        this.widthOfCol[i] = this.mousePositionX - this.distance;
+      }
+    }
   }
 
   public resizeDownStart() {
@@ -73,24 +94,25 @@ export class TableComponent implements OnInit {
     this.isDownResizable = false;
   }
   public colResizeStart() {
-    this.colIsResizable = true;
+    this.isResizableCol[0] = true;
+    console.log(this.isResizableCol);
   }
   public colResizeStop() {
-    this.colIsResizable = false;
+    this.isResizableCol[0] = false;
   }
 
   public colTwoResizeStart() {
-    this.colTwoIsResizable = true;
+    this.isResizableCol[1] = true;
   }
   public colTwoResizeStop() {
-    this.colTwoIsResizable = false;
+    this.isResizableCol[1] = false;
   }
 
   public colThreeResizeStart() {
-    this.colThreeIsResizable = true;
+    this.isResizableCol[2] = true;
   }
   public colThreeResizeStop() {
-    this.colThreeIsResizable = false;
+    this.isResizableCol[2] = false;
   }
 
   public doSmt() {
@@ -119,6 +141,13 @@ export class TableComponent implements OnInit {
   ngOnInit() {
     this.headers = ['VALIDATION', 'LAST UPDATED', 'MODE', 'STATE',
       'NAME', 'VALIDATION', 'LAST UPDATED', 'TYPE', 'MODE', 'STATE', 'ORDER'];
+
+    for (let i = 0; i < this.headers.length; i++) {
+      this.isResizableCol[i] = false;
+      this.widthOfCol[i] = this.colMinWidth;
+    }
+
   }
+
 
 }

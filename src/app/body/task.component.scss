@@ -128,7 +128,7 @@
     transition: background-color 0.24s, transform 0.3s;
     &:hover  {
       transform: scale(2);
-      background-color: #dadada;
+      background-color: #f1f1f1;
     }
     &.x-app-form__icon--active {
       background-color: #dadada;
@@ -142,6 +142,10 @@
     height: 10px;
     border-radius: 50%;
     cursor: pointer;
+    transition: transform 0.24s ease-out;
+    &:hover {
+      transform: scale(2);
+    }
     &.x-app-form__dot--active {
       border: 2px solid $primary;
     }
